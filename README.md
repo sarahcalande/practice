@@ -10,7 +10,7 @@
 
 ## Instructions
 
-Today we're building RandoPic, an app for viewing a random picture. There is a backend API that we have provided and you will be building out the frontend.
+Today we're building RandoPic, an app for viewing a single random picture. There is a backend API that we have provided and you will be building out the frontend.
 
 A RandoPic user will be able to do the following things:
 
@@ -57,7 +57,8 @@ When the page loads you will need to make a request to the API to get the data a
 ```
 GET 'http://localhost:3000/images/1?_embed=comments'
 
-Note that we need to explicity tell the server to return child comments for the image by adding `?_embed=comments` to the image URL.
+Note that we need to explicity tell the server to return child comments for the image by adding
+`?_embed=comments` to the image URL.
 
 Example Response:
 {
@@ -101,7 +102,7 @@ This app will use what is called *optimistic rendering*. This means the DOM will
 #### API Docs
 #### Endpoint to create a Like
 ```
-PATCH 'https://randopic.herokuapp.com/images/1'
+PATCH 'http://localhost:3000/images/1'
 
 Required keys in the body of the request:
 {
@@ -163,11 +164,9 @@ Required Headers
 
 Example Response (created comment):
 {
-  {
-    "imageId": 1,
-    "content": "first comment!",
-    "id": 2
-  }
+  "imageId": 1,
+  "content": "first comment!",
+  "id": 2
 }
 ```
 
