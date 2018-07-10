@@ -67,14 +67,13 @@ Example Response:
   "id": 1,
   "comments": [
     {
-      "id": 1,
       "content": "first comment!",
-      "imageId": 1
+      "imageId": 1,
+      "id": 1
     }
   ]
 }
 ```
-**Before you start anything else, locate the variable `imageId` in the `src/index.js`. Replace the value of the variable with your assigned number.** This will be the image id you'll be working with for this code challenge.
 
 Use the data from the API response to append the information to the DOM. You will need to add:
 
