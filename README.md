@@ -27,6 +27,21 @@ A RandoPic user will be able to do the following things:
 
 We have also provided an `examplePage.html` file to see an example of the HTML you'll want to generate for a photo. NOTE that examplePage.html is a static html page; you'll be dynamically manipulating the `index.html` file using JavaScript.
 
+## The API
+
+Instead of actually accessing the data from a remote API, this challenge uses a package called [json-server](https://github.com/typicode/json-server) to create a fake API for development and testing.
+
+It is very easy to set-up.
+
+1 - Run the command `npm install -g json-server` in the command line from this directory
+
+2 - Run  `json-server --watch db.json`
+
+That's it. You will have a server running on `localhost:3000` that serves the JSON data contained in the `db.json` file.
+
+*Troubleshooting: If this fails, be sure you don't already have something running on port 3000*
+
+
 ## Deliverables and How to Approach
 
 For this challenge it is important to work iteratively, one feature at a time, before moving on to the next. You should **prioritize making code that works over attempting all of the deliverables.**
@@ -40,20 +55,21 @@ When the page loads you will need to make a request to the API to get the data a
 #### API Docs
 #### Endpoint to show an individual Image
 ```
-GET 'https://randopic.herokuapp.com/images/:image_id'
+GET 'http://localhost:3000/images/1?_embed=comments'
+
+Note that we need to explicity tell the server to return child comments for the image by adding `?_embed=comments` to the image URL.
 
 Example Response:
 {
-  "id": 1,
   "url": "http://blog.flatironschool.com/wp-content/uploads/2017/06/IMAG2936-352x200.jpg",
   "name": "Science Fair",
-  "like_count": 0,
+  "likeCount": 0,
+  "id": 1,
   "comments": [
     {
       "id": 1,
       "content": "first comment!",
-      "created_at": "2017-09-27T18:18:05.623Z",
-      "updated_at": "2017-09-27T18:18:05.623Z"
+      "imageId": 1
     }
   ]
 }
@@ -69,7 +85,7 @@ Use the data from the API response to append the information to the DOM. You wil
 
 Use the example html to guide you as to where this data should go.
 
-(If you cannot get your fetch request to work correctly you can always use the example response above to append content to the DOM and work with for the subsequent steps)
+(If you cannot get your fetch request to work correctly you can always use the example response above to append content to the DOM and work with for the subsequent steps.)
 
 ## Step 2 - Like Feature (Frontend)
 
@@ -86,11 +102,11 @@ This app will use what is called *optimistic rendering*. This means the DOM will
 #### API Docs
 #### Endpoint to create a Like
 ```
-POST 'https://randopic.herokuapp.com/likes'
+PATCH 'https://randopic.herokuapp.com/images/1'
 
 Required keys in the body of the request:
 {
-  image_id: <insert image id here>
+  likeCount: <insert number here>
 }
 
 Required Headers
@@ -101,10 +117,17 @@ Required Headers
 
 Example Response:
 {
-    "id": 112,
-    "image_id": 8,
-    "created_at": "2017-11-17T13:52:22.167Z",
-    "updated_at": "2017-11-17T13:52:22.167Z"
+  "url": "http://blog.flatironschool.com/wp-content/uploads/2017/06/IMAG2936-352x200.jpg",
+  "name": "Science Fair",
+  "likeCount": <new count>,
+  "id": 1,
+  "comments": [
+    {
+      "id": 1,
+      "content": "first comment!",
+      "imageId": 1
+    }
+  ]
 }
 ```
 
@@ -125,7 +148,7 @@ As before, after optimistically rendering a comment we need to persist the comme
 #### API Docs
 #### Endpoint to create a Comment
 ```
-POST 'https://randopic.herokuapp.com/comments'
+POST 'http://localhost:3000/comments'
 
 Required keys in the body of the request:
 {
@@ -142,13 +165,14 @@ Required Headers
 Example Response (created comment):
 {
   {
-    "id": 2,
+    "imageId": 1,
     "content": "first comment!",
-    "created_at": "2017-09-27T18:18:05.623Z",
-    "updated_at": "2017-09-27T18:18:05.623Z"
+    "id": 2
   }
 }
 ```
+
+If your response contains an id but no content key, check to make sure you are sending a correctly formatted request body and headers.
 
 Since we are using optimistic rendering, you shouldn't have to do anything with the response.
 
@@ -169,12 +193,10 @@ Take the same iterative approach as before.
 #### API Docs
 #### Endpoint to delete a Comment
 ```
-DELETE 'https://randopic.herokuapp.com/comments/:comment_id'
+DELETE 'http://localhost:3000/comments/:comment_id'
 
 Example Response:
-{
-  message: 'Comment Successfully Destroyed'
-}
+{}
 ```
 
 *(Hint: To get the comment's id you may have to think about changing the way you handle the response received from creating a comment)*
