@@ -39,7 +39,8 @@ It is very easy to set-up.
 
 That's it. You will have a server running on `localhost:3000` that serves the JSON data contained in the `db.json` file.
 
-*Troubleshooting: If this fails, be sure you don't already have something running on port 3000*
+*Troubleshooting: If this fails, be sure you don't already have something running on port 3000.
+If you can't get the server running, let your instructor know ASAP.*
 
 
 ## Deliverables and How to Approach
@@ -89,7 +90,7 @@ Use the example html to guide you as to where this data should go.
 
 ## Step 2 - Like Feature (Frontend)
 
-The next feature to approach is the functionality to add likes to a picture. First get this working in the browser only without worrying about persistence.
+The next feature to approach is the functionality to add likes to a picture. First get this working in the browser only, without worrying about persistence.
 
 Clicking the 'Like' button should increase the number of likes by one.
 
@@ -97,7 +98,7 @@ A user can like the same picture multiple times.
 
 ## Step 3 - Like Feature (Backend)
 
-This app will use what is called *optimistic rendering*. This means the DOM will be updated before the changes are added to the database.  When a user clicks the 'Like' button we will immediately update the DOM.  Next your job is to make a PATCH request to persist the new Like in the backend database. It is a PATCH request because we are updating an existing image in the database, specifically it's likeCount.
+This app will use what is called *optimistic rendering*. This means the DOM will be updated before the changes are added to the database.  When a user clicks the 'Like' button we will immediately update the DOM.  Next your job is to make a PATCH request to persist the new Like in the backend database. It is a PATCH request because we are updating an existing image in the database, specifically its likeCount.
 
 #### API Docs
 #### Endpoint to create a Like
@@ -133,7 +134,7 @@ Example Response:
 
 Since we are using optimistic rendering, you shouldn't have to do anything with the response.
 
-To test your code you should be able to refresh the page and see the number of likes be the increased number.
+To test your code you should be able to refresh your index.html and see the number of likes be the increased number.
 
 ## Step 4 - Comment Feature (Frontend)
 
@@ -175,26 +176,3 @@ If your response contains an id but no content key, check to make sure you are s
 Since we are using optimistic rendering, you shouldn't have to do anything with the response.
 
 To test your code you should be able to refresh the page and see any comments you added.
-
-## BONUS - NOT REQUIRED
-
-## Step 6 - Delete a comment feature
-
-This feature is not required and you should only attempt if you have time.
-
-When you display new comments add a button next to each comment to delete that comment.
-
-Clicking the button should delete the comment from the DOM as well as deleting it from the database.
-
-Take the same iterative approach as before.
-
-#### API Docs
-#### Endpoint to delete a Comment
-```
-DELETE 'http://localhost:3000/comments/:comment_id'
-
-Example Response:
-{}
-```
-
-*(Hint: To get the comment's id you may have to think about changing the way you handle the response received from creating a comment)*
