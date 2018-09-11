@@ -42,6 +42,8 @@ That's it. You will have a server running on `localhost:3000` that serves the JS
 *Troubleshooting: If this fails, be sure you don't already have something running on port 3000.
 If you can't get the server running, let your instructor know ASAP.*
 
+If something should break with your db.json file, there is backup data in the backup-db.md file. You can simply delete the information in db.json and copy the backup-db.md data into db.json. Note that this will remove any comments or likes you had previously updated.
+
 
 ## Deliverables and How to Approach
 
@@ -63,8 +65,8 @@ Note that we need to explicity tell the server to return child comments for the 
 
 Example Response:
 {
-  "url": "http://blog.flatironschool.com/wp-content/uploads/2017/06/IMAG2936-352x200.jpg",
-  "name": "Science Fair",
+  "url": "http://blog.flatironschool.com/wp-content/uploads/2017/02/Campus_Normal-352x200.png",
+  "name": "Lovelace Graffiti Wall",
   "likeCount": 0,
   "id": 1,
   "comments": [
@@ -118,23 +120,15 @@ Required Headers
 
 Example Response:
 {
-  "url": "http://blog.flatironschool.com/wp-content/uploads/2017/06/IMAG2936-352x200.jpg",
-  "name": "Science Fair",
+  "url": "http://blog.flatironschool.com/wp-content/uploads/2017/02/Campus_Normal-352x200.png",
+  "name": "Lovelace Graffiti Wall",
   "likeCount": <new count>,
-  "id": 1,
-  "comments": [
-    {
-      "id": 1,
-      "content": "first comment!",
-      "imageId": 1
-    }
-  ]
+  "id": 1
 }
 ```
+If your response contains an id but no content key, check to make sure you are sending a correctly formatted request body and headers and using the correct method. To test your code you should be able to refresh your index.html and see the number of likes be the increased number.
 
 Since we are using optimistic rendering, you shouldn't have to do anything with the response.
-
-To test your code you should be able to refresh your index.html and see the number of likes be the increased number.
 
 ## Step 4 - Comment Feature (Frontend)
 
@@ -170,9 +164,7 @@ Example Response (created comment):
   "id": 2
 }
 ```
-
-If your response contains an id but no content key, check to make sure you are sending a correctly formatted request body and headers.
+If your response contains an id but no content key, check to make sure you are sending a correctly formatted request body and headers and using the correct method. To test your code you should be able to refresh the page and see any comments you added.
 
 Since we are using optimistic rendering, you shouldn't have to do anything with the response.
 
-To test your code you should be able to refresh the page and see any comments you added.
