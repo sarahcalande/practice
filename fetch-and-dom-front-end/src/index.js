@@ -2,13 +2,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const imageId = 1 //Enter your assigned imageId here
 
-  const imageURL = `https://randopic.herokuapp.com/images/${imageId}`
+  const imageURL = `http://localhost:3000/images/${imageId}`
 
-  const likeURL = `https://randopic.herokuapp.com/likes/`
+  const likeURL = `http://localhost:3000/likes/`
 
-  const commentsURL = `https://randopic.herokuapp.com/comments/`
+  const commentsURL = `http://localhost:3000/comments/`
 
 
 
 })
-
